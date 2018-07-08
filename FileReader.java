@@ -22,13 +22,6 @@ public class FileReader {
 
 
 
-         //   String s = new String(data.toString());
-
-
-
-
-
-
             try (PrintWriter out = new PrintWriter(OTPUTFILE_PATH)) {
                 final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
                 final Matcher matcher = pattern.matcher(data);
@@ -42,9 +35,6 @@ public class FileReader {
 
                     while (matcher.find()) {
                         System.out.println("Full match: " + matcher.group(0));
-
-
-
 
 
                         String tofile = matcher.group(0);
@@ -61,36 +51,8 @@ public class FileReader {
                             out.println(subStr[i]);
                         }
 
-
-
-             /*   for (int i = 1; i <= matcher.groupCount(); i++) {
-                    System.out.println("Group " + i + ": " + matcher.group(i));
-                } */
                     }
 
-
-
-
-              /*  String[] words = p3.split(s);
-                for (String word : words)
-                    System.out.println(word);
-
-
-
-                for(String subStr:words) {
-                    System.out.println(subStr);
-                } */
-                //System.out.println(s);
-                try {
-                   // String tofile = data.toString();
-
-                }
-
-                finally {
-                    //После чего мы должны закрыть файл
-                    //Иначе файл не запишется
-                    out.close();
-                }
             }
         }catch ( Exception ex ) {
             ex.printStackTrace();
@@ -98,21 +60,22 @@ public class FileReader {
 
     }
 
-
-    void writeData(){
-
-
-
-
-    }
-
-
-
 }
 
 
 
 
+
+//  try {
+// String tofile = data.toString();
+
+//  }
+
+//   finally {
+//После чего мы должны закрыть файл
+//Иначе файл не запишется
+//        out.close();
+//   }
 
 
 

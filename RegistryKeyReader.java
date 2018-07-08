@@ -33,16 +33,7 @@ public class RegistryKeyReader {
             out.close();}
 
 
-        // Read a string
-        String Bios = Advapi32Util.registryGetStringValue(
-                WinReg.HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\BIOS", "SystemProductName");
 
-        System.out.printf("Product Name: %s%n", Bios);
-
-        // Read an int (& 0xFFFFFFFFL for large unsigned int)
-        int timeout = Advapi32Util.registryGetIntValue(
-                WinReg.HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Windows", "ShutdownWarningDialogTimeout");
-        System.out.printf("Shutdown Warning Dialog Timeout: %d (%d as unsigned long)%n", timeout, timeout & 0xFFFFFFFFL);
 
     }
 }

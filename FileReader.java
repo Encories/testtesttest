@@ -3,29 +3,75 @@ package by.rubakhin.iba;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.Scanner;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FileReader {
  //   public static final String INPUTFILE_PATH = "C:\\Users\\pika4\\Documents\\IBA\\src\\by\\rubakhin\\iba\\input.txt";
     public static final String OTPUTFILE_PATH = "C:\\Users\\pika4\\Documents\\IBA\\src\\by\\rubakhin\\iba\\output.txt";
+    final String regex = "[«].+[»][=][«].+[»]";
 
 
     public void Read(String value){
 
-    try {
-        try (Scanner in = new Scanner(new File(value))) {
+    try (Scanner in = new Scanner(new File(value))) {
             StringBuilder data = new StringBuilder();
+
+            while (in.hasNext()){
+                data.append(in.nextLine()).append("\n");}
+
+
+
+         //   String s = new String(data.toString());
+
+
+
+
+
+
             try (PrintWriter out = new PrintWriter(OTPUTFILE_PATH)) {
-                while (in.hasNext())
-                    data.append(in.nextLine()).append("\n");
-
-                String s = new String(data.toString());
+                final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+                final Matcher matcher = pattern.matcher(data);
 
 
-             //   String[] words = s.split("\\s");
+             /*   if (matcher.matches() == true){
+                    System.out.println(data);
 
-                Pattern p3 = Pattern.compile("^«a»=«b»$");
-                String[] words = p3.split(s);
+                } */
+
+
+                    while (matcher.find()) {
+                        System.out.println("Full match: " + matcher.group(0));
+
+
+
+
+
+                        String tofile = matcher.group(0);
+
+                        String[] subStr;
+                        String delimeter = "="; // Разделитель
+                        subStr = tofile.split(delimeter); // Разделения строки str с помощью метода split()
+
+
+                        for (int i = 0; i < subStr.length; i++) {
+                            System.out.println(subStr[i]);
+
+                            //Записываем текст у файл
+                            out.println(subStr[i]);
+                        }
+
+
+
+             /*   for (int i = 1; i <= matcher.groupCount(); i++) {
+                    System.out.println("Group " + i + ": " + matcher.group(i));
+                } */
+                    }
+
+
+
+
+              /*  String[] words = p3.split(s);
                 for (String word : words)
                     System.out.println(word);
 
@@ -33,13 +79,11 @@ public class FileReader {
 
                 for(String subStr:words) {
                     System.out.println(subStr);
-                }
+                } */
                 //System.out.println(s);
                 try {
                    // String tofile = data.toString();
-                    String tofile = data.toString();
-                    //Записываем текст у файл
-                    out.println(tofile);
+
                 }
 
                 finally {
@@ -48,11 +92,10 @@ public class FileReader {
                     out.close();
                 }
             }
-        }
-
-    } catch ( Exception ex ) {
-        ex.printStackTrace();
+        }catch ( Exception ex ) {
+            ex.printStackTrace();
     }
+
     }
 
 
